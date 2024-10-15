@@ -1,6 +1,6 @@
 import * as pagebuilder from "./pagebuilder.js";
 
-
+const API_key = "1d5b6a5b-9a0d-4b6a-9d6a-5b1d5b6a5b6a";
 
 /**
  * Hourly Variables
@@ -35,22 +35,24 @@ async function getInfo() {
     /**
      * API says it has an error object but it doesn't exist when using the API
      */
-    // try{
-    //     const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=41.9533&longitude=-87.7054&current=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,weather_code&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto");
+    const APIUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_key}`
+
+    try{
+        const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=41.9533&longitude=-87.7054&current=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,weather_code&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto");
         
-    //     if (response.error == true) {
-    //         throw new Error("Network response was not ok");
-    //     }
-    //     const data = await response.json();
-    //     console.log(data);    
+        if (response.error == true) {
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        console.log(data);    
         
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    } catch (error) {
+        console.log(error);
+    }
 
 
-    const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=41.9533&longitude=-87.7054&current=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,weather_code&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto");
-    const data = await response.json();
+    // const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=41.9533&longitude=-87.7054&current=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,weather_code&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto");
+    // const data = await response.json();
 
     /**
      * Set Current Variables

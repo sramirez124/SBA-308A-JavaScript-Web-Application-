@@ -43,3 +43,8 @@ export function sevenDayForecast(time, maxTemp, minTemp, precipProb) {
     // sevenDayForecast.appendChild(precipProbDisplay);
     
 }
+
+// use to change the weather image from sunny to cloudy for example
+export function weatherImage(weatherCode) {
+
+}
