@@ -19,9 +19,15 @@ function sendDisplayInfo(data){
     const {
         name: city, 
         main: {temp, feels_like, temp_min, temp_max, humidity}, 
-        weather: [{description, id}]
+        weather: [{description, icon}]
     } = data;
     
-    pagebuilder.currentWeatherDisplay(city, temp, feels_like, temp_max, temp_min);
-    //pagebuilder.sevenDayForecast(temp_max, temp_min);
+    pagebuilder.currentWeatherDisplay(city, temp, feels_like, temp_max, temp_min, description, icon);
+    weatherImage(icon);
+}
+
+export function weatherImage(weatherCode) {
+    const imgUrl = `http://openweathermap.org/img/wn/${weatherCode}@2x.png`;
+    console.log(imgUrl);
+    return imgUrl
 }
