@@ -1,31 +1,34 @@
-export function currentWeatherDisplay(location, currentTemp, currentRealFeelTemp) {
+export function currentWeatherDisplay(location, currentTemp, currentRealFeelTemp, maxTemp, minTemp) {
+    console.log("this fired");
     const currentWeatherDisplay = document.getElementById("currentWeatherDisplay");
     const newDiv = document.createElement("div");
     newDiv.setAttribute("id", "currentDay");
 
-    const locationDisplay = document.createElement("h1");
-    locationDisplay.setAttribute("style", "font-size 2.5rem;");
-    locationDisplay.innerHTML = "(h1)Location: " + location;
+    const locationDisplay = document.createElement("h2");
+    locationDisplay.innerHTML = location;
     newDiv.appendChild(locationDisplay);
 
-    const currentTempDisplay = document.createElement("p");
-    currentTempDisplay.innerHTML = "(p)Current Temperature: " + currentTemp;
+    const currentTempDisplay = document.createElement("h1");
+    currentTempDisplay.innerHTML = `${currentTemp.toFixed(0)}°F`;
     newDiv.appendChild(currentTempDisplay);
 
     const currentRealFeelTempDisplay = document.createElement("p");
-    currentRealFeelTempDisplay.innerHTML = "(p)Current RealFeel Temperature: " + currentRealFeelTemp;
+    currentRealFeelTempDisplay.innerHTML = `Real Feel: ${currentRealFeelTemp.toFixed(0)}°F`;
     newDiv.appendChild(currentRealFeelTempDisplay);
+
+    const highLowTemp = document.createElement("p");
+    highLowTemp.innerHTML = `H: ${maxTemp} L: ${minTemp}`;
+    highLowTemp.setAttribute("style", "font-weight: bold;");
+    newDiv.appendChild(highLowTemp);
 
     currentWeatherDisplay.appendChild(newDiv);
 }
 
-export function sevenDayForecast(time, maxTemp, minTemp, precipProb) {
+export function sevenDayForecast(maxTemp, minTemp, ) {
+    console.log("this fired");
     const sevenDayForecast = document.getElementById("7DayForecast");
     const newDiv = document.createElement("div");
     newDiv.setAttribute("id", "day");
-
-    const date = document.createElement("h1");
-    date.innerHTML = ("(h1)") + time;
 
     const TempDisplay = document.createElement("p");
     TempDisplay.innerHTML = `(p)H: ${maxTemp} L: ${minTemp}`;
@@ -37,11 +40,6 @@ export function sevenDayForecast(time, maxTemp, minTemp, precipProb) {
     newDiv.appendChild(date);
     newDiv.appendChild(TempDisplay);
     newDiv.appendChild(precipProbDisplay);
-    
-    // sevenDayForecast.appendChild(date);
-    // sevenDayForecast.appendChild(TempDisplay);
-    // sevenDayForecast.appendChild(precipProbDisplay);
-    
 }
 
 // use to change the weather image from sunny to cloudy for example
