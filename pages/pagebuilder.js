@@ -1,33 +1,37 @@
 export function currentWeatherDisplay(location, currentTemp, currentRealFeelTemp) {
     const currentWeatherDisplay = document.getElementById("currentWeatherDisplay");
+    const newDiv = document.createElement("div");
+    newDiv.setAttribute("id", "currentDay");
 
     const locationDisplay = document.createElement("h1");
+    locationDisplay.setAttribute("style", "font-size 2.5rem;");
     locationDisplay.innerHTML = "(h1)Location: " + location;
-    currentWeatherDisplay.appendChild(locationDisplay);
+    newDiv.appendChild(locationDisplay);
 
-    const currentTempDisplay = document.createElement("h1");
-    currentTempDisplay.innerHTML = "(h1)Current Temperature: " + currentTemp;
-    currentWeatherDisplay.appendChild(currentTempDisplay);
+    const currentTempDisplay = document.createElement("p");
+    currentTempDisplay.innerHTML = "(p)Current Temperature: " + currentTemp;
+    newDiv.appendChild(currentTempDisplay);
 
-    const currentRealFeelTempDisplay = document.createElement("h2");
-    currentRealFeelTempDisplay.innerHTML = "(h2)Current RealFeel Temperature: " + currentRealFeelTemp;
-    currentWeatherDisplay.appendChild(currentRealFeelTempDisplay);
+    const currentRealFeelTempDisplay = document.createElement("p");
+    currentRealFeelTempDisplay.innerHTML = "(p)Current RealFeel Temperature: " + currentRealFeelTemp;
+    newDiv.appendChild(currentRealFeelTempDisplay);
+
+    currentWeatherDisplay.appendChild(newDiv);
 }
 
 export function sevenDayForecast(time, maxTemp, minTemp, precipProb) {
     const sevenDayForecast = document.getElementById("7DayForecast");
     const newDiv = document.createElement("div");
     newDiv.setAttribute("id", "day");
-    newDiv.setAttribute("style", "border: 1px solid black;", "padding: 10px;");
 
     const date = document.createElement("h1");
     date.innerHTML = ("(h1)") + time;
 
-    const TempDisplay = document.createElement("h2");
-    TempDisplay.innerHTML = `(h2)H: ${maxTemp} L: ${minTemp}`;
+    const TempDisplay = document.createElement("p");
+    TempDisplay.innerHTML = `(p)H: ${maxTemp} L: ${minTemp}`;
 
-    const precipProbDisplay = document.createElement("h3");
-    precipProbDisplay.innerHTML = `(h3)Precipitation:  + ${precipProb}%`;
+    const precipProbDisplay = document.createElement("p");
+    precipProbDisplay.innerHTML = `(p)Precipitation:  ${precipProb}%`;
 
     sevenDayForecast.appendChild(newDiv);
     newDiv.appendChild(date);
