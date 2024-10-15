@@ -34,23 +34,30 @@ export function currentWeatherDisplay(location, currentTemp, currentRealFeelTemp
     currentWeatherDisplay.appendChild(newDiv);
 }
 
-export function sevenDayForecast(maxTemp, minTemp, ) {
-    console.log("this fired");
-    const sevenDayForecast = document.getElementById("7DayForecast");
-    const newDiv = document.createElement("div");
-    newDiv.setAttribute("id", "day");
+/**
+ * Last API made it really clear how to handle the multiple days and sadly this new api,
+ * while easier to use for everything else, is not showing the multiple days
+ * in the json data. Its on me of course because it works on their website but the 7 day forecast 
+ * won't be displayed for now
+ */
 
-    const TempDisplay = document.createElement("p");
-    TempDisplay.innerHTML = `(p)H: ${maxTemp.toFixed(0)} L: ${minTemp.toFixed(0)}`;
+// export function sevenDayForecast(maxTemp, minTemp, ) {
+//     console.log("this fired");
+//     const sevenDayForecast = document.getElementById("7DayForecast");
+//     const newDiv = document.createElement("div");
+//     newDiv.setAttribute("id", "day");
 
-    const precipProbDisplay = document.createElement("p");
-    precipProbDisplay.innerHTML = `(p)Precipitation:  ${precipProb}%`;
+//     const TempDisplay = document.createElement("p");
+//     TempDisplay.innerHTML = `(p)H: ${maxTemp.toFixed(0)} L: ${minTemp.toFixed(0)}`;
 
-    sevenDayForecast.appendChild(newDiv);
-    newDiv.appendChild(date);
-    newDiv.appendChild(TempDisplay);
-    newDiv.appendChild(precipProbDisplay);
-}
+//     const precipProbDisplay = document.createElement("p");
+//     precipProbDisplay.innerHTML = `(p)Precipitation:  ${precipProb}%`;
+
+//     sevenDayForecast.appendChild(newDiv);
+//     newDiv.appendChild(date);
+//     newDiv.appendChild(TempDisplay);
+//     newDiv.appendChild(precipProbDisplay);
+// }
 
 // use to change the weather image from sunny to cloudy for example
 export function weatherImage(weatherCode) {
