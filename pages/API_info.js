@@ -16,6 +16,7 @@ import * as pagebuilder from "./pagebuilder.js";
 
 let currentTemp = 0;
 let currentRealFeelTemp = 0;
+let location = "";
 
 /**
  * Daily Weather Variables
@@ -29,10 +30,20 @@ let dailyPrecipitationProbability = 0;
 
 getInfo();
 async function getInfo() {
-    const response = await fetch(
-        "https://api.open-meteo.com/v1/forecast?latitude=41.9533&longitude=-87.7054&current=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,weather_code&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto"
-    );
-    const data = await response.json();
+    try{
+        const response = await fetch(
+            "https://api.open-meteo.com/v1/forecast?latitude=41.9533&longitude=-87.7054&current=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,weather_code&hourly=temperature_2m,precipitation_probability,precipitation&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto"
+        );
+
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        
+        const data = await response.json();
+    } catch (error) {
+        console.log(error);
+    }
+    
 
     /**
      * Set Current Variables
@@ -40,10 +51,12 @@ async function getInfo() {
 
     currentTemp = data.current.temperature_2m;
     console.log("Current Temp: " + currentTemp);
+
     currentRealFeelTemp = data.current.apparent_temperature;
     console.log("Current RealFeel Temp: " + currentRealFeelTemp);
 
-    pagebuilder.currentWeatherDisplay(currentTemp, currentRealFeelTemp);
+    location = data.timezone;
+    pagebuilder.currentWeatherDisplay(location, currentTemp, currentRealFeelTemp);
 
     /**
      * Set Hourly Variables
@@ -55,6 +68,8 @@ async function getInfo() {
      */
     console.log("7 Day Forecast");
     for (let i = 0; i < data.daily.time.length; i++) {
+        pagebuilder.sevenDayForecast(data.daily.time[i], data.daily.temperature_2m_max[i], data.daily.temperature_2m_min[i], data.daily.precipitation_probability_max[i]);
+
         console.log(data.daily.time[i], " Max Temp: " + data.daily.temperature_2m_max[i], " Min Temp: " + data.daily.temperature_2m_min[i], " Precipitation Chance: " + data.daily.precipitation_probability_max[i]);
     }
 
