@@ -1,4 +1,4 @@
-import  pagebuilder from "pagebuilder.js";
+import * as pagebuilder from "./pagebuilder.js";
 
 /**
  * Hourly Variables
@@ -11,6 +11,13 @@ import  pagebuilder from "pagebuilder.js";
 // let hourlyPrecipitationHeight = 0;
 
 /**
+ * Current Weather Variables
+ */
+
+let currentTemp = 0;
+let currentRealFeelTemp = 0;
+
+/**
  * Daily Weather Variables
  */
 
@@ -18,12 +25,7 @@ let dailyMinTemp = 0;
 let dailyMaxTemp = 0;
 let dailyPrecipitationProbability = 0;
 
-/**
- * Current Weather Variables
- */
 
-let currentTemp = 0;
-let currentRealFeelTemp = 0;
 
 getInfo();
 async function getInfo() {
@@ -34,13 +36,14 @@ async function getInfo() {
 
     /**
      * Set Current Variables
-     * I did this backwards I know.
      */
 
     currentTemp = data.current.temperature_2m;
     console.log("Current Temp: " + currentTemp);
     currentRealFeelTemp = data.current.apparent_temperature;
     console.log("Current RealFeel Temp: " + currentRealFeelTemp);
+
+    pagebuilder.currentWeatherDisplay(currentTemp, currentRealFeelTemp);
 
     /**
      * Set Hourly Variables
@@ -53,7 +56,6 @@ async function getInfo() {
     console.log("7 Day Forecast");
     for (let i = 0; i < data.daily.time.length; i++) {
         console.log(data.daily.time[i], " Max Temp: " + data.daily.temperature_2m_max[i], " Min Temp: " + data.daily.temperature_2m_min[i], " Precipitation Chance: " + data.daily.precipitation_probability_max[i]);
-        
     }
 
 
